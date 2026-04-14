@@ -67,10 +67,17 @@ let (records, report) = pipeline::extract_source(&adapter, &path, &mut seen);
 | Claude/Codex/Gemini Sessions | ✅ JSONL conversation logs | ✅ | — |
 | Facebook Friends | ✅ your_friends.json | ✅ | — |
 
+### Ready (parser built — awaiting user data export)
+
+| Platform | File Import | Notes |
+|----------|-------------|-------|
+| Spotify | ✅ StreamingHistory JSON, Library, Search | Request data at spotify.com/account/privacy |
+
 ### Registered (stub — awaiting data or API implementation)
 
 | Platform | File Import | API Connector |
 |----------|-------------|---------------|
+| **Social** | | |
 | Pinterest | Planned | Planned |
 | Twitter/X | Planned | Planned |
 | Discord | Planned | Planned |
@@ -80,11 +87,18 @@ let (records, report) = pipeline::extract_source(&adapter, &path, &mut seen);
 | Reddit | Planned | Planned |
 | LinkedIn | Planned | Planned |
 | TikTok | Planned | Planned |
-| Spotify | Planned | Planned |
-| Steam | Planned | Planned |
-| GitHub | Planned | Planned |
 | Slack | Planned | Planned |
+| **Music** | | |
+| Apple Music | Planned | Planned |
+| Amazon Music | Planned | Planned |
+| Tidal | Planned | Planned |
+| SoundCloud | Planned | Planned |
+| **Productivity** | | |
 | Notion | Planned | Planned |
+| GitHub | Planned | Planned |
+| **Gaming** | | |
+| Steam | Planned | Planned |
+| **Health & Finance** | | |
 | Apple Health | Planned | Planned |
 | Financial (bank CSV/OFX) | Planned | — |
 | Amazon (order history) | Planned | Planned |

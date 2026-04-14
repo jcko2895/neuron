@@ -17,6 +17,7 @@ pub mod gmail;
 pub mod google_takeout;
 pub mod imessage;
 pub mod instagram;
+pub mod spotify;
 pub mod stubs;
 
 /// The universal adapter interface.
