@@ -35,9 +35,9 @@
 //! "Nicholas Wilson Towne" might appear as "Nicholas Wilson Towne" or with
 //! mojibake characters that need decoding.
 
-use crate::common::{AccountContext, CommonRecord, TrustLevel};
+use crate::common::{format_unix_timestamp, AccountContext, CommonRecord, TrustLevel};
 use std::path::{Path, PathBuf};
-use tracing::{debug, info, warn};
+use tracing::{info, warn};
 
 pub struct FacebookAdapter {
     /// The user's Facebook display name (for is_user detection)
@@ -271,57 +271,3 @@ impl super::SourceAdapter for FacebookAdapter {
     }
 }
 
-/// Convert Unix seconds to ISO 8601 string.
-/// Simple implementation without chrono dependency.
-fn format_unix_timestamp(secs: u64) -> String {
-    // Days since epoch calculation
-    let days = secs / 86400;
-    let time_secs = secs % 86400;
-    let hours = time_secs / 3600;
-    let minutes = (time_secs % 3600) / 60;
-    let seconds = time_secs % 60;
-
-    // Simple year/month/day from days since epoch
-    // Good enough for sorting — not perfectly accurate for leap seconds
-    let mut y = 1970i64;
-    let mut remaining_days = days as i64;
-
-    loop {
-        let days_in_year = if y % 4 == 0 && (y % 100 != 0 || y % 400 == 0) {
-            366
-        } else {
-            365
-        };
-        if remaining_days < days_in_year {
-            break;
-        }
-        remaining_days -= days_in_year;
-        y += 1;
-    }
-
-    let leap = y % 4 == 0 && (y % 100 != 0 || y % 400 == 0);
-    let days_in_months = if leap {
-        [31, 29, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    } else {
-        [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31]
-    };
-
-    let mut m = 0usize;
-    for (i, &dim) in days_in_months.iter().enumerate() {
-        if remaining_days < dim as i64 {
-            m = i;
-            break;
-        }
-        remaining_days -= dim as i64;
-    }
-
-    format!(
-        "{:04}-{:02}-{:02}T{:02}:{:02}:{:02}+00:00",
-        y,
-        m + 1,
-        remaining_days + 1,
-        hours,
-        minutes,
-        seconds
-    )
-}

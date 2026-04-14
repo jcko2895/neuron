@@ -9,12 +9,16 @@
 use crate::common::CommonRecord;
 use std::path::{Path, PathBuf};
 
+pub mod browser;
+pub mod claude_sessions;
 pub mod facebook;
+pub mod facebook_friends;
 pub mod gmail;
+pub mod stubs;
 
 /// The universal adapter interface.
 ///
-/// Every platform (Facebook, iMessage, Chrome, etc.) implements this trait.
+/// Every platform (Facebook, Gmail, iMessage, Chrome, etc.) implements this trait.
 /// The pipeline calls these methods to discover, extract, and sync data.
 pub trait SourceAdapter: Send + Sync {
     /// Human-readable name ("Facebook", "Gmail", "iMessage", etc.)

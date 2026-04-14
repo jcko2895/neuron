@@ -9,7 +9,7 @@
 
 use crate::common::{AccountContext, CommonRecord, TrustLevel};
 use std::path::{Path, PathBuf};
-use tracing::{debug, info, warn};
+use tracing::info;
 
 pub struct GmailAdapter {
     user_email: String,
@@ -96,7 +96,7 @@ impl GmailAdapter {
         let is_user = from.contains(&self.user_email) || from.contains(&self.user_name);
 
         let actor = extract_name_from_email(&from);
-        let recipient = extract_name_from_email(&to);
+        let _recipient = extract_name_from_email(&to);
 
         let content_hash = CommonRecord::compute_content_hash(&display_content);
 
