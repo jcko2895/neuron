@@ -8,7 +8,7 @@
 
 use crate::common::{CommonRecord, TrustLevel};
 use std::path::{Path, PathBuf};
-use tracing::{info, warn};
+use tracing::info;
 
 pub struct InstagramAdapter {
     user_name: String,
@@ -53,7 +53,7 @@ impl super::SourceAdapter for InstagramAdapter {
                                             let content = msg.get("content").and_then(|s| s.as_str()).unwrap_or("").to_string();
                                             if content.is_empty() { continue; }
                                             let ts_ms = msg.get("timestamp_ms").and_then(|t| t.as_u64()).unwrap_or(0);
-                                            let timestamp = if ts_ms > 0 { Some(crate::adapters::facebook::format_unix_timestamp_pub(ts_ms / 1000)) } else { None };
+                                            let timestamp = if ts_ms > 0 { Some(crate::common::format_unix_timestamp(ts_ms / 1000)) } else { None };
                                             let is_user = sender.contains(&self.user_name);
                                             records.push(CommonRecord {
                                                 content: content.clone(),
@@ -93,7 +93,7 @@ impl super::SourceAdapter for InstagramAdapter {
                                 let title = s.get("title").or_else(|| s.get("string_map_data").and_then(|m| m.get("Search")).and_then(|v| v.get("value"))).and_then(|v| v.as_str()).unwrap_or("").to_string();
                                 if title.is_empty() { continue; }
                                 let ts = s.get("timestamp").and_then(|t| t.as_u64()).unwrap_or(0);
-                                let timestamp = if ts > 0 { Some(crate::adapters::facebook::format_unix_timestamp_pub(ts)) } else { None };
+                                let timestamp = if ts > 0 { Some(crate::common::format_unix_timestamp(ts)) } else { None };
                                 records.push(CommonRecord {
                                     content: format!("[Instagram Search] {}", title),
                                     timestamp,

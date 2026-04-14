@@ -14,6 +14,9 @@ pub mod claude_sessions;
 pub mod facebook;
 pub mod facebook_friends;
 pub mod gmail;
+pub mod google_takeout;
+pub mod imessage;
+pub mod instagram;
 pub mod stubs;
 
 /// The universal adapter interface.

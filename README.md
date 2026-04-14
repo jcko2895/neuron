@@ -50,18 +50,44 @@ let (records, report) = pipeline::extract_source(&adapter, &path, &mut seen);
 
 ## Adapters
 
-| Platform | File Import | API Connector | Status |
-|----------|-------------|---------------|--------|
-| Facebook | ✅ Takeout JSON | Planned | Working |
-| Gmail | ✅ .eml files | Planned | Working |
-| Instagram | Planned | Planned | — |
-| Snapchat | Planned | Planned | — |
-| iMessage | Planned | — | — |
-| Browser (Chrome/Edge/Firefox) | Planned | — | — |
-| Google Takeout (YouTube, Calendar, Location, Contacts) | Planned | Planned | — |
-| Twitter/X | Planned | Planned | — |
-| Discord | Planned | Planned | — |
-| Apple Health | Planned | Planned | — |
+### Working (tested against real data)
+
+| Platform | File Import | Records Tested | Speed |
+|----------|-------------|----------------|-------|
+| Facebook | ✅ Meta "Download Your Information" JSON | 190K messages | 288K/sec |
+| Gmail | ✅ .eml files (Google Takeout) | 200K emails | 112K/sec |
+| Instagram | ✅ Meta "Download Your Information" JSON | 100K messages | 41K/sec |
+| iMessage | ✅ iPhone backup JSONL exports | 159K messages | 76K/sec |
+| Google Takeout: Chrome | ✅ History.json | ✅ | — |
+| Google Takeout: YouTube | ✅ watch-history.html, search-history.html | ✅ | — |
+| Google Takeout: Calendar | ✅ ICS files | ✅ | — |
+| Google Takeout: Contacts | ✅ VCF/vCard files | ✅ | — |
+| Google Takeout: My Activity | ✅ MyActivity.html (Search, Chrome, Maps, etc.) | ✅ | — |
+| Browser (Chrome/Edge/Firefox/Safari) | ✅ Local SQLite history DBs | ✅ | — |
+| Claude/Codex/Gemini Sessions | ✅ JSONL conversation logs | ✅ | — |
+| Facebook Friends | ✅ your_friends.json | ✅ | — |
+
+### Registered (stub — awaiting data or API implementation)
+
+| Platform | File Import | API Connector |
+|----------|-------------|---------------|
+| Pinterest | Planned | Planned |
+| Twitter/X | Planned | Planned |
+| Discord | Planned | Planned |
+| WhatsApp | Planned | Planned |
+| Telegram | Planned | Planned |
+| Signal | Planned | Planned |
+| Reddit | Planned | Planned |
+| LinkedIn | Planned | Planned |
+| TikTok | Planned | Planned |
+| Spotify | Planned | Planned |
+| Steam | Planned | Planned |
+| GitHub | Planned | Planned |
+| Slack | Planned | Planned |
+| Notion | Planned | Planned |
+| Apple Health | Planned | Planned |
+| Financial (bank CSV/OFX) | Planned | — |
+| Amazon (order history) | Planned | Planned |
 
 ## CommonRecord
 
