@@ -79,7 +79,7 @@ let (records, report) = pipeline::extract_source(&adapter, &path, &mut seen);
 |----------|-------------|---------------|
 | **Social** | | |
 | Pinterest | Planned | Planned |
-| Twitter/X | Planned | Planned |
+| X | Planned | Planned |
 | Discord | Planned | Planned |
 | WhatsApp | Planned | Planned |
 | Telegram | Planned | Planned |

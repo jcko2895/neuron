@@ -39,7 +39,7 @@ macro_rules! stub_adapter {
 }
 
 stub_adapter!(PinterestAdapter, "Pinterest", "pinterest");
-stub_adapter!(TwitterAdapter, "Twitter/X", "twitter");
+stub_adapter!(XAdapter, "X", "x");
 stub_adapter!(DiscordAdapter, "Discord", "discord");
 stub_adapter!(WhatsAppAdapter, "WhatsApp", "whatsapp");
 stub_adapter!(TelegramAdapter, "Telegram", "telegram");
