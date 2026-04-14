@@ -1,0 +1,1 @@
+D:\neuron\target\debug\libneuron.rlib: D:\neuron\src\adapters\facebook.rs D:\neuron\src\adapters\gmail.rs D:\neuron\src\adapters\mod.rs D:\neuron\src\common.rs D:\neuron\src\discover.rs D:\neuron\src\entity.rs D:\neuron\src\lib.rs D:\neuron\src\pipeline.rs
