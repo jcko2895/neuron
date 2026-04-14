@@ -10,6 +10,7 @@ use crate::common::CommonRecord;
 use std::path::{Path, PathBuf};
 
 pub mod browser;
+pub mod chatgpt;
 pub mod claude_sessions;
 pub mod facebook;
 pub mod facebook_friends;

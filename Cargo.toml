@@ -17,6 +17,7 @@ sha2 = "0.10"
 dirs-next = "2"
 rusqlite = { version = "0.31", features = ["bundled"] }
 glob = "0.3"
+zip = "2"
 
 [[bin]]
 name = "neuron-test-facebook"

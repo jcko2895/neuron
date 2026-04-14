@@ -65,6 +65,11 @@ fn main() {
             paths: vec![PathBuf::from("G:/staging/google-takeout/Takeout")],
         },
         Source {
+            name: "ChatGPT",
+            adapter: Box::new(neuron::adapters::chatgpt::ChatGptAdapter::new("Nick")),
+            paths: vec![PathBuf::from("G:/archive/downloads/ChatGPT_Export-2025-09-06.zip")],
+        },
+        Source {
             name: "Facebook Friends",
             adapter: Box::new(neuron::adapters::facebook_friends::FacebookFriendsAdapter::new("Nick")),
             paths: vec![PathBuf::from("D:/EVA/SUBSTRATE/data/raw/facebook3/connections/friends")],
