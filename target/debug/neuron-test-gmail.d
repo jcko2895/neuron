@@ -1,1 +1,0 @@
-D:\neuron\target\debug\neuron-test-gmail.exe: D:\neuron\src\adapters\facebook.rs D:\neuron\src\adapters\gmail.rs D:\neuron\src\adapters\mod.rs D:\neuron\src\bin\test_gmail.rs D:\neuron\src\common.rs D:\neuron\src\discover.rs D:\neuron\src\entity.rs D:\neuron\src\lib.rs D:\neuron\src\pipeline.rs
