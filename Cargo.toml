@@ -19,6 +19,7 @@ rusqlite = { version = "0.31", features = ["bundled"] }
 glob = "0.3"
 zip = "2"
 flate2 = "1"
+ureq = { version = "2", features = ["json"] }
 
 [[bin]]
 name = "neuron-test-facebook"
@@ -35,3 +36,7 @@ path = "src/bin/test_all.rs"
 [[bin]]
 name = "neuron-ingest-all"
 path = "src/bin/ingest_all.rs"
+
+[[bin]]
+name = "neuron-load-mempalace"
+path = "src/bin/load_mempalace.rs"
