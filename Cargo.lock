@@ -525,6 +525,7 @@ name = "neuron"
 version = "0.1.0"
 dependencies = [
  "dirs-next",
+ "flate2",
  "glob",
  "rusqlite",
  "serde",

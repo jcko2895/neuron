@@ -84,6 +84,21 @@ fn main() {
             paths: vec![PathBuf::from("D:/EVA/SUBSTRATE/data/raw/macbook/safari_history.db")],
         },
         Source {
+            name: "Apple Photos (metadata)",
+            adapter: Box::new(neuron::adapters::apple_photos::ApplePhotosAdapter::new("Nick")),
+            paths: vec![PathBuf::from("D:/EVA/SUBSTRATE/data/raw/macbook/photos.sqlite")],
+        },
+        Source {
+            name: "Apple Notes",
+            adapter: Box::new(neuron::adapters::apple_notes::AppleNotesAdapter::new("Nick")),
+            paths: vec![PathBuf::from("D:/EVA/SUBSTRATE/data/raw/macbook/notes.sqlite")],
+        },
+        Source {
+            name: "Apple Contacts",
+            adapter: Box::new(neuron::adapters::apple_contacts::AppleContactsAdapter::new("Nick")),
+            paths: vec![PathBuf::from("D:/EVA/SUBSTRATE/data/raw/macbook/contacts")],
+        },
+        Source {
             name: "ChatGPT",
             adapter: Box::new(neuron::adapters::chatgpt::ChatGptAdapter::new("Nick")),
             paths: vec![PathBuf::from("G:/archive/downloads/ChatGPT_Export-2025-09-06.zip")],

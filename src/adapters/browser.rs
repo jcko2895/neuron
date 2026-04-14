@@ -261,6 +261,76 @@ impl BrowserHistoryAdapter {
 
         Ok(records)
     }
+
+    /// Extract Safari history.
+    /// Safari uses history_items + history_visits tables.
+    /// Timestamps are seconds since Apple epoch (2001-01-01).
+    fn extract_safari(&self, db_path: &Path, original_path: &Path) -> Result<Vec<CommonRecord>, String> {
+        const APPLE_EPOCH: u64 = 978307200;
+
+        // Copy to temp to avoid lock
+        let temp_path = std::env::temp_dir().join("neuron_safari_history_copy.db");
+        std::fs::copy(db_path, &temp_path)
+            .map_err(|e| format!("Failed to copy Safari history: {}", e))?;
+
+        let conn = rusqlite::Connection::open_with_flags(
+            &temp_path, rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY,
+        ).map_err(|e| format!("Failed to open Safari history: {}", e))?;
+
+        let mut stmt = conn.prepare(
+            "SELECT hi.url, hi.domain_expansion, hv.title, hv.visit_time
+             FROM history_visits hv
+             JOIN history_items hi ON hv.history_item = hi.id
+             WHERE hv.visit_time IS NOT NULL
+             ORDER BY hv.visit_time DESC"
+        ).map_err(|e| format!("Safari query failed: {}", e))?;
+
+        let mut records = Vec::new();
+
+        let rows = stmt.query_map([], |row| {
+            let url: String = row.get(0)?;
+            let domain: Option<String> = row.get(1)?;
+            let title: Option<String> = row.get(2)?;
+            let visit_time: f64 = row.get(3)?;
+            Ok((url, domain, title, visit_time))
+        }).map_err(|e| format!("Query failed: {}", e))?;
+
+        for row in rows {
+            let (url, _domain, title, visit_time) = match row {
+                Ok(r) => r,
+                Err(_) => continue,
+            };
+
+            let unix_secs = (visit_time as u64) + APPLE_EPOCH;
+            let timestamp = Some(format_unix_timestamp(unix_secs));
+
+            let title = title.unwrap_or_default();
+            let content = if title.is_empty() {
+                url.clone()
+            } else {
+                format!("{} — {}", title, url)
+            };
+
+            records.push(CommonRecord {
+                content: content.clone(),
+                timestamp,
+                actor: None,
+                is_user: true,
+                source_file: original_path.to_string_lossy().to_string(),
+                source_type: "safari_history".into(),
+                trust_level: TrustLevel::Primary,
+                content_hash: CommonRecord::compute_content_hash(&content),
+                platform: "safari".into(),
+                thread_id: None,
+                thread_name: None,
+                account: None,
+                metadata: serde_json::json!({ "url": url }),
+            });
+        }
+
+        let _ = std::fs::remove_file(&temp_path);
+        Ok(records)
+    }
 }
 
 impl super::SourceAdapter for BrowserHistoryAdapter {
@@ -288,12 +358,7 @@ impl super::SourceAdapter for BrowserHistoryAdapter {
         match self.kind {
             BrowserKind::Chrome | BrowserKind::Edge => self.extract_chromium(path, path),
             BrowserKind::Firefox => self.extract_firefox(path, path),
-            BrowserKind::Safari => {
-                // Safari uses a similar schema to Chromium but with different table names.
-                // Stub for now — Safari on Windows is rare.
-                warn!("Safari history extraction not yet implemented");
-                Ok(Vec::new())
-            }
+            BrowserKind::Safari => self.extract_safari(path, path),
         }
     }
 

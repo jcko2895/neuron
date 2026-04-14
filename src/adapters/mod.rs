@@ -9,6 +9,9 @@
 use crate::common::CommonRecord;
 use std::path::{Path, PathBuf};
 
+pub mod apple_contacts;
+pub mod apple_notes;
+pub mod apple_photos;
 pub mod browser;
 pub mod chatgpt;
 pub mod claude_sessions;
