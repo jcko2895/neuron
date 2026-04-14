@@ -17,6 +17,7 @@ pub mod facebook_friends;
 pub mod gmail;
 pub mod google_takeout;
 pub mod imessage;
+pub mod imessage_db;
 pub mod instagram;
 pub mod spotify;
 pub mod stubs;

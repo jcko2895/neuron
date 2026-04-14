@@ -55,6 +55,11 @@ fn main() {
             ],
         },
         Source {
+            name: "iMessage (MacBook chat.db)",
+            adapter: Box::new(neuron::adapters::imessage_db::IMessageDbAdapter::new("Nick")),
+            paths: vec![PathBuf::from("D:/EVA/SUBSTRATE/data/raw/macbook/chat.db")],
+        },
+        Source {
             name: "Spotify",
             adapter: Box::new(neuron::adapters::spotify::SpotifyAdapter::new("Nick")),
             paths: vec![PathBuf::from("D:/EVA/SUBSTRATE/data/raw/spotify")],
@@ -63,6 +68,20 @@ fn main() {
             name: "Google Takeout",
             adapter: Box::new(neuron::adapters::google_takeout::GoogleTakeoutAdapter::new("Nick")),
             paths: vec![PathBuf::from("G:/staging/google-takeout/Takeout")],
+        },
+        Source {
+            name: "Edge Browser",
+            adapter: Box::new(neuron::adapters::browser::BrowserHistoryAdapter::new(
+                neuron::adapters::browser::BrowserKind::Edge,
+            )),
+            paths: vec![PathBuf::from("C:/Users/Nick/AppData/Local/Microsoft/Edge/User Data/Default/History")],
+        },
+        Source {
+            name: "Safari (MacBook)",
+            adapter: Box::new(neuron::adapters::browser::BrowserHistoryAdapter::new(
+                neuron::adapters::browser::BrowserKind::Safari,
+            )),
+            paths: vec![PathBuf::from("D:/EVA/SUBSTRATE/data/raw/macbook/safari_history.db")],
         },
         Source {
             name: "ChatGPT",
