@@ -65,6 +65,11 @@ fn main() {
             paths: vec![PathBuf::from("D:/EVA/SUBSTRATE/data/raw/spotify")],
         },
         Source {
+            name: "Snapchat",
+            adapter: Box::new(neuron::adapters::snapchat::SnapchatAdapter::new("Nick", "nicklesnbutter")),
+            paths: vec![PathBuf::from("C:/Users/Nick/Downloads/mydata~1776234583355.zip")],
+        },
+        Source {
             name: "Google Takeout",
             adapter: Box::new(neuron::adapters::google_takeout::GoogleTakeoutAdapter::new("Nick")),
             paths: vec![PathBuf::from("G:/staging/google-takeout/Takeout")],
