@@ -18,4 +18,5 @@ pub mod adapters;
 pub mod common;
 pub mod discover;
 pub mod entity;
+pub mod identity;
 pub mod pipeline;

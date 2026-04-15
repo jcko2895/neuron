@@ -40,3 +40,7 @@ path = "src/bin/ingest_all.rs"
 [[bin]]
 name = "neuron-load-mempalace"
 path = "src/bin/load_mempalace.rs"
+
+[[bin]]
+name = "neuron-identity"
+path = "src/bin/identity.rs"
